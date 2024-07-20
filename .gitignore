@@ -1,0 +1,6 @@
+.idea/
+.env
+model_regressor
+/logs
+/plugins
+/rabbitmq

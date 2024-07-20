@@ -1,0 +1,68 @@
+version: "3"
+services:
+  api:
+    build:
+      context: ./app/
+      dockerfile: Dockerfile_api
+    image: event-planner-api:latest
+    ports:
+    - "8000:8000"
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app
+    networks:
+      - my_network
+
+  front:
+    build:
+      context: ./front/
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./front:/app
+    depends_on:
+      - api
+    networks:
+      - my_network
+
+  rabbitmq:
+    image: rabbitmq:3.13.1-management
+    hostname: rabbitmq
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USERNAME}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbit disk_free_limit 2147483648
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+    networks:
+      - my_network
+
+  worker:
+    build:
+      context: ./workers/
+      dockerfile: Dockerfile_worker
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./workers:/app
+    depends_on:
+      - rabbitmq
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
