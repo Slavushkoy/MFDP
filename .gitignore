@@ -6,7 +6,7 @@ model_regressor
 /rabbitmq
 clearml.conf
 /ml_models
-/logs
-/plugins
-/data
+airflow/logs
+airflow/plugins
+airflow/data
 airflow/Dockerfile
