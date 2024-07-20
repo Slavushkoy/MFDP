@@ -10,7 +10,8 @@ def main():
     st.title('Welcome to the portal!')
     st.text("Our service will help you optimize your shelter's resources,\n"
             'due to information about the duration of the animal’s stay in the shelter.\n'
-            'Enter the parameters of the animal upon admission to the shelter and click the predict button.\n'
+            'Enter the parameters of the animal upon admission to the shelter \n'
+            'and click the predict button.\n'
             '\n'
             'The service is provided free of charge\n'
             'and has a purpose'
@@ -36,7 +37,6 @@ def main():
     sex_upon_intake = st.selectbox('sex_upon_intake', sex_upon_intake_opt)
 
     age_upon_intake = st.number_input('age_upon_intake in days', min_value=0, step=1, value=0)
-    weight_upon_intake = st.number_input('weight_upon_intake', min_value=0.0, step=0.1,  value=0.0)
 
     color = st.selectbox('mixed_color', opt)
 

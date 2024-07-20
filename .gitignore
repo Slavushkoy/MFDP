@@ -4,3 +4,9 @@ model_regressor
 /logs
 /plugins
 /rabbitmq
+clearml.conf
+/ml_models
+/logs
+/plugins
+/data
+airflow/Dockerfile
