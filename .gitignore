@@ -1,0 +1,12 @@
+.idea/
+.env
+model_regressor
+/logs
+/plugins
+/rabbitmq
+clearml.conf
+/ml_models
+airflow/logs
+airflow/plugins
+airflow/data
+airflow/Dockerfile
